@@ -101,6 +101,30 @@ export const checkDependenciaExist = (req, res, next) => {
         })
     });
 }
+
+
+export const checkDepExCrear = (req, res, next) => {
+    //trae todas las dependencias
+    getDependencias().then(function (resp) {
+        //compara cada una de las dependencias con la enviada para ver si encajan
+        let dep = resp.filter((item) => item.toJSON().id_unidad == req.body.id_unidad);
+        //si la dependencia es encontrada permite continuar con la siguiente función
+        if (dep.length>0) {
+            return res.status(400).json({
+                message: "La dependencia ya existe" + dep
+            })
+        } else {
+             next();
+           
+        }
+        
+    }).catch(function (err) {
+        return res.status(400).json({
+            //en caso de error envía un mensaje
+            message: "error con la base de datos"
+        })
+    });
+}
 export const checkEquipoExist=(req,res,next)=>{
     getEquipos().then(function (resp) {
         //compara cada uno de los equipos con el enviado para ver si encajan

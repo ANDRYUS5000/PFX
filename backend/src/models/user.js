@@ -10,11 +10,6 @@ const userSchema=new Schema({
         ref:"Role",
         type:Schema.Types.ObjectId
     }],
-    dependencia:[{
-        ref:"Dependencia",
-        type:Schema.Types.ObjectId
-        //type:String
-    }],
     email : { type: String, require: true,unique:true,sparse:true},
     password:{ type:String,require:true},
     telefono:{ type:String,require:true}
@@ -33,6 +28,7 @@ userSchema.statics.encryptPassword=async(password)=>{
 userSchema.statics.comparePassword=async(password,receivedPassword)=>{
     return await bcrypt.compare(password,receivedPassword)
 }
+
 
 //exportamos el modelo para usarlo en los controladores
 

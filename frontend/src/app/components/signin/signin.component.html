@@ -1,0 +1,64 @@
+<div class="row p-5">
+    <div class="col-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                Ingreso
+            </div>
+            <div class="card-body">
+                <form class="from-group" (submit)="login()">
+                    <div class="form-group">
+                        <label for="email">Correo</label>
+                        <input type="email" [(ngModel)]="user.email"  name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Contraseña</label>
+                        <input type="password"  [(ngModel)]="user.password" name="pass" id="pass" class="form-control" required>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary  ">Ingresar</button>
+                        </div>   
+                        <div class="form-group col">
+                            <a  type="button" data-toggle="modal" data-target="#modalPass"
+                            ><b>Olvidé mi clave</b></a>
+                        </div>  
+                    </div>                                  
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modalPass" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="from-group" id="formGeneral" name="formGeneral" (submit)="changePass()">
+                <div class="modal-factores">
+                    <h3>Cambiar Contraseña</h3>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input type="email" [(ngModel)]="user2.email"  name="email2" id="email2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Nueva Contraseña</label>
+                    <input type="password"  [(ngModel)]="user2.password" name="pass2" id="pass2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Confirme su Contraseña</label>
+                    <input type="password"  [(ngModel)]="user2.passwordn" name="pass3" id="pass3" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary  ">Guardar</button>
+                    </div>   
+                    <div class="form-group col">
+                        <button type="buttton" class="btn btn-cancel" data-dismiss="modal" >Cerrar</button>
+                    </div> 
+                </div>   
+            </form>
+        </div>
+    </div>
+</div>
+

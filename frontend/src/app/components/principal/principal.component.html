@@ -1,0 +1,38 @@
+<div class="container-fluid mt-10 mb-10">
+    <div class="row">
+        <div class="form-group col">
+            <button type="button" class="btn btn-primary mt-20" data-toggle="modal" data-target="#modalPerson"
+            ><b>Registrar persona a cargo</b></button>
+        </div>  
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalPerson" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="from-group" id="formGeneral" name="formGeneral" (submit)="registerPerson()">
+                <div class="modal-factores">
+                    <h3>Registro</h3>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" [(ngModel)]="person.name"  name="name" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Cédula</label>
+                    <input type="text"  [(ngModel)]="person.ced" name="ced" id="ced" class="form-control" required>
+                </div>
+               
+                <div class="row">
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary  ">Guardar</button>
+                    </div>   
+                    <div class="form-group col">
+                        <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+                    </div> 
+                </div>   
+            </form>
+        </div>
+    </div>
+</div>

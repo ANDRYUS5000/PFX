@@ -31,13 +31,13 @@ export class AuthService {
           }),
         )
   }
-//conexión para realizar el registro de usuario, se debe especificar la url y enviar el usuario
-   signUp(user:any){
-   return this.http.post<any>(this.URL+'/auth/signup',user);
-  }
+
   //conexión para realizar el ingreso al sistema, se debe especificar la url y enviar el usuario
   login(user:any){
    return this.http.post<any>(this.URL+'/auth/signin',user);
+  }
+  changePassword(user:any){
+    return this.http.post<any>(this.URL+'/auth/npass',user);
   }
   //conexión para verificar si el usuario ha ingresado al sistema, para eso se obtiene el token
   loggedIn():Boolean{
@@ -58,7 +58,14 @@ export class AuthService {
   //método para cerrar sesión, se eliminan las variables del localStorage y se redirige al inicio
   logOut(){
     localStorage.clear()
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
+  }
+  
+  registerPersonaCargo(persona:any){
+    return this.http.post<any>(this.URL+'/auth/registerperson',persona)
+  }
+  registerDependencia(dependencia:any){
+    return this.http.post<any>(this.URL+'/auth/creardependencia',dependencia)
   }
   //ruta para obtener las dependencias 
   getDependencias(){
@@ -68,16 +75,9 @@ export class AuthService {
   getRoles(){
     return this.http.get(this.URL +'/auth/roles');
   }
-  //ruta para obtener los tipos de espacios físicos 
-  getTiposEspFis(){
-    return this.http.get<string[]>(this.URL+'/auth/tipoespfis');
+  getTiposDependencia(){
+    return this.http.get(this.URL +'/auth/tipodependencias');
   }
-  //ruta para obtener loscódigos de los tipos de espacios físicos 
-  getTEFCode(){
-    return this.http.get<any>(this.URL+'/auth/tipoEspFisCode');
-  }
-  //ruta para obtener los espacios físicos
-  getEspacios(){
-    return this.http.get<any>(this.URL+'/auth/espacios');
-  }
+ 
+  
 }

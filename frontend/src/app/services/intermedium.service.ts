@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 import { Router } from '@angular/router';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 import Swal from 'sweetalert2';
 
@@ -41,13 +41,11 @@ export class IntermediumService {
           this.router.navigate(['/reservas'])
         }
         //si el rol es Admin se redirige a la pestaña de admin
-        else if(localStorage.getItem('roles')==='ADMIN')
+        else 
         {
-          this.router.navigate(['/reportes'])
+          this.router.navigate(['/registerdep'])
         }
-        //de lo contrario se asume que es Super Admin y se redirige a la pestaña de registrar usuario
-        else
-          this.router.navigate(['/registeruser'])
+        
       },
       //si la clave es incorrecta o el usuario no ha sido encontrado se lanza una alerta
        err=>{console.log(err),
@@ -74,16 +72,7 @@ esAdmin(){
   //de lo contrario false
   else return false;
 }
-//Método para validar si el rol es Super Admin
-esSuperAdmin(){
-  if(localStorage.getItem('roles')==="SUPERA")
-  {
-    //si lo es retorna true
-    return true;
-  }
-  //de lo contrario false
-  else return false;
-} 
+
 //Método para obtener el id del usuario
 getid():String{
   let id = localStorage.getItem('id')

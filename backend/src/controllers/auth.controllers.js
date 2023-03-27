@@ -7,7 +7,7 @@ import TipoDependencia from '../models/tipoDependencia'
 import personaCargo from '../models/personacargo'
 import equipo from '../models/equipo'
 import Tabla from '../models/tabla'
-import Version from '../models/version'
+
 
 //controlador para manejar todo lo referente a token y usuarios
 
@@ -15,7 +15,7 @@ import Version from '../models/version'
 //método para ingresar una vez se tiene cuenta
 export const signIn=async(req,res)=>{
     //con esto se obtiene los datos completos del rol y la dependencia usando sus objectId
-    const userFound=await User.findOne({email:req.body.email}).populate(['roles','dependencia'])
+    const userFound=await User.findOne({email:req.body.email}).populate(['roles'])
     //si el usuario no existe se envía un mensaje de error
     if(!userFound){
         return res.status(400).json({message:"El usuario no existe"})
@@ -85,14 +85,65 @@ export const crearEquipo=async(req,res)=>{
     
     
 }
+
+export const removeEquipo = async (req, res) => {
+    
+    try {
+        //Se busca el equipo y se lo elimina
+        const eqp = await equipo.findByIdAndDelete(req.params.id);   
+        console.log("equipo borrado")    
+        return res.status(200).json(true)
+        
+    }
+    catch (error) {
+        return console.log(error)
+    }
+}
+
+export const updateEquipo=async(req,res)=> {
+    //se busca el equipo y se actualiza cualquier campo
+    const eqpb=await equipo.findById(req.params.id)
+
+    const eqp= await equipo.findByIdAndUpdate(req.params.id, {
+        qr:eqpb.qr,
+        fabricante:req.body.fabricante,
+        referencia:req.body.referencia,
+        disco_duro:req.body.disco_duro,
+        ram:req.body.ram,
+        procesador:req.body.procesador,
+        impqr:eqpb.impqr,
+        impref:req.body.impref,
+        impa_cargo:eqpb.impa_cargo,
+        a_cargo:eqpb.a_cargo
+    },
+    {new:true})
+   return res.status(201).json({message:"Equipo actualizado"})
+}
+
+export const removeTabla = async (req, res) => {
+    
+    
+        try{
+            //Se busca la tabla y se la elimina
+        const tabla = await Tabla.findByIdAndDelete(req.params.id)
+        console.log("tabla eliminada");
+        return res.status(200).json(true)
+        }
+        catch(error){
+            return res.status(400).json(false)
+        }
+    
+    
+}
 //método para crear un nuevo espacio, esto solo lo puede hacer un Super Administrador
 export const crearDependencia = async (req, res) => {
     //se desestructuran los datos enviados por el usuario, para obtener los parámetros necesarios
     
-    const {cod_uni,name,tipo_unidad}=req.body;
+    const {id_unidad,nombre_unidad,tipo_unidad}=req.body;
      //se crea un nuevo espacio
     const newDependencia=new Dependencia({
-        name
+        id_unidad,
+        nombre_unidad
     })
    //se busca el tipo de espacio en la base de datos
     if (tipo_unidad){
@@ -159,6 +210,19 @@ export const tipoDependencias = function (req, res) {
     });
 };
 
+export const changePassword=async(req,res)=>{
+ try{
+    console.log("entré back")
+    const user=await User.findOne({email:req.body.email})
+    const passwordn=await User.encryptPassword(req.body.password);
+    console.log(user,'-',passwordn)
+    const userPass=await User.findByIdAndUpdate({_id:user.id},{password:passwordn},{new:true});   
+    return res.status(200).json("Contraseña cambiada")
+ }
+ catch(error){
+    return res.status(400).json(error)
+ }
+}
 //Método para obtener los roles
 export const roles = function (req, res) {
     //variable que almacena todos los roles
@@ -176,12 +240,12 @@ export const roles = function (req, res) {
         return res.status(200).json(rolel);
     });
 };
-//Método para registrar un usuario, es diferente del método signup porque no se envía token ya que un super Administrador lo ejecuta
+//Método para registrar un usuario, es diferente del método signup porque no se envía token ya que un Administrador lo ejecuta
 
 export const registrarUsuario=async(req,res)=>{
      //se desestructuran los datos para obtener los parámetros necesarios
     
-    const {name,ced,roles,dependencia,email,password,telefono}=req.body;
+    const {name,ced,roles,email,password,telefono}=req.body;
   //se crea un nuevo usuario
     const newUser=new User({
         name,
@@ -202,22 +266,13 @@ export const registrarUsuario=async(req,res)=>{
         const role = await Role.findOne({name:"USER"})
         newUser.roles=[role._id]
     }
-    //se valida si la dependencia existe
-    if(dependencia){
-         //se obtiene todas las dependencias
-        const foundDep=await Dependencia.find({});
-        //se busca si la dependencia enviada coincide 
-        let dep = foundDep.filter((item) => item.toJSON().id_unidad == dependencia);
-        // y si coincide se almacena el ObjectId
-        newUser.dependencia=dep[0];
-    }
+   
      //se envía el usuario a la base de datos
     const savedUser=await newUser.save();
     //se envía el nombre del rol y el estatus 200
     res.status(200).json({roles:savedUser.roles[0].toJSON().name})
-    
+   
 }
-
 
 export const crearVer=async(req,res)=>{
     const {dependencia,user,tabla,documento}=req.body

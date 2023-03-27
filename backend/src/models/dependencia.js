@@ -6,8 +6,8 @@ import {Schema,model} from 'mongoose'
 //cod_tip_unidad: es el código de cada tipo de dependencia, puede ser 01,02...
 //tipo_unidad: es el tipo de dependencia puede ser departamento, convenio, facultad, programa,...
 const dependenciaSchema=new Schema({
-    cod_uni:{type:String,unique:true},
-    name:String,   
+    id_unidad:{type:String,unique:true},
+    nombre_unidad:String,   
     tipo_unidad:
     {
     ref:"TipoDependencia",

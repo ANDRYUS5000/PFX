@@ -16,13 +16,11 @@ export class CrearusuariosComponent implements OnInit {
      name:'',
      ced:'',   
      roles:[''], 
-     dependencia:'',
      email : '',
      password:'',
      telefono:''
    }
-   //se crea la variable de depedencias
-   dependencias: any = [];
+  
     //se crea la variable de roles
    roles: any = [];
    //método constructor para instanciar los servicios y el enrutador
@@ -37,9 +35,8 @@ export class CrearusuariosComponent implements OnInit {
    //método que se ejecuta apenas se inicia la pestaña
    ngOnInit(): void {
     //solo se ejecuta si el usuario es super Admin
-    if(this.intmService.esSuperAdmin())
+    if(this.intmService.esAdmin())
     {
-      this.getDependencias();
       this.getRoles();
     }
     //De lo contrario se lanza un mensaje de error y se cierra la sesión
@@ -50,24 +47,8 @@ export class CrearusuariosComponent implements OnInit {
     }
     
    }
-   //método para obtener el valor seleccionado en la dependencia del nuevo usuario
  
-   onFacultad(e: any) {
-     this.user.dependencia = e.target.value;
- }
-  //método para traer las dependencias
-   getDependencias() {
-     this.authService.getDependencias().subscribe(
-       res => {
-         
-         for (let i of Object.values(res)) {
-           this.dependencias.push(i);
-         }
-         
-       },
-       err => console.log(err)
-     );
-   };
+ 
  //método para obtener los roles
    getRoles(){
      this.authService.getRoles().subscribe(
@@ -97,7 +78,6 @@ export class CrearusuariosComponent implements OnInit {
           Swal.fire("Registro exitoso","El usuario fue registrado","success")  
           //luego se limpian todos los campos
           this.user.ced='';
-          this.user.dependencia='';
           this.user.email='';
           this.user.name='';
           this.user.password='';
