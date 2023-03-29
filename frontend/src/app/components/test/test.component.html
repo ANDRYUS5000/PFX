@@ -1,0 +1,35 @@
+<h1>TEST</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <form (submit)="Request()" enctype="multipart/form-data">
+                <div class="card text-left">
+                    <div class="card-header text-center">
+                        Firma
+                    </div>
+            
+                    <div class="card-body">
+                        
+                        <div>
+                            <label class="form-label">Nombre del Funcionario</label>
+                            <input type="text" class="form-control" [(ngModel)]="firma.nombre" name="nombre">
+                        </div>
+                        <div>
+                            <label class="form-label">Cargo del Funcionario</label>
+                            <input type="text" class="form-control" [(ngModel)]="firma.cargo" name="cargo">
+                        </div>
+                        <div>
+                            <label for="anexos" class="form-label">Firma</label>
+                            <input type="file" name="anexos" id="anexos" class="form-control" (change)="selectFile($event)">
+                        </div>
+            
+                    </div>
+            
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary">Reservar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

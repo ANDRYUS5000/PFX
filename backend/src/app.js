@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'//middleware 
 import pkg from '../package.json'
 import authRoutes from './routes/auth.routes'
+import firmaRoutes from './routes/firma.routes'
 import userRoutes from './routes/user.routes'
 import {createRoles} from './libs/initialSetup'
 
@@ -52,4 +53,5 @@ app.get('/',(req,res)=>{
 //especificación de las rutas para el usuario, las reservas y la autenticación
 app.use('/api/users',userRoutes)
 app.use('/api/auth',authRoutes)
+app.use('/api/firma',firmaRoutes)
 export default app

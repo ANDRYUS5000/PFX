@@ -9,6 +9,7 @@ import { CrearusuariosComponent } from './components/crearusuarios/crearusuarios
 import { CreardependenciaComponent } from './components/creardependencia/creardependencia.component';
 
 import { PrincipalComponent } from './components/principal/principal.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PrincipalComponent } from './components/principal/principal.component';
     SigninComponent,
     CrearusuariosComponent,
     CreardependenciaComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

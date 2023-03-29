@@ -2,13 +2,16 @@ import {Schema,model} from 'mongoose'
 
 const FrimaSchema=new Schema({
     nombre:{
-        type:String
+        type:String,
+        require:true
     },
     cargo:{
-        type:String
+        type:String,
+        require:true
     },
     file:{
-        Type:Schema.Types.ObjectId
+        Type:String,
+        require:false
     }    
 },
 {
