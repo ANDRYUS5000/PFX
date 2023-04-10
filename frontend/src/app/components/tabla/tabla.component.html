@@ -1,0 +1,76 @@
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">QR</th>
+        <th scope="col">Fabricante</th>
+        <th scope="col">Referencia</th>
+        <th scope="col">Disco duro</th>
+        <th scope="col">RAM</th>
+        <th scope="col">Procesador</th>
+        <th scope="col">Persona a cargo</th>
+        <th scope="col">QR Imp</th>
+        <th scope="col">Ref Imp</th>
+        <th scope="col">Persona a Cargo Imp</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalEquipo"><b>Agregar equipo</b></button>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalFab"><b>Agregar Fabricante</b></button>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalDisco"><b>Agregar Disco Duro</b></button>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalProcesador"><b>Agregar Procesador</b></button>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalRefpc"><b>Agregar Referencia PC</b></button>
+<button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalRefimp"><b>Agregar Ref Impresora</b></button>
+
+            
+
+<div class="modal p-5" id="modalFab" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-modfabricante></app-modfabricante>
+        </div>
+    </div>
+</div>
+
+<div class="modal m-5" id="modalDisco" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-modisco></app-modisco>
+        </div>
+    </div>
+</div>
+<div class="modal m-5" id="modalProcesador" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-modprocesador></app-modprocesador>
+        </div>
+    </div>
+</div>
+<div class="modal m-5" id="modalRefpc" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-modrefpc></app-modrefpc>
+        </div>
+    </div>
+</div>
+<div class="modal m-5" id="modalRefimp" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-refimp></app-refimp>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal p-5" id="modalEquipo" data-backdrop="static">
+    <div class="modal-dialog me-20" role="document">
+        <div class="modal-content">
+            <app-modequipo></app-modequipo>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<form class="from-group" id="formGeneral" name="formGeneral" (submit)="createEquipo()">
+    <div class="modal-factores">
+        <h3>Registro de Equipo</h3>
+    </div>
+    <div class="form-group">
+        <label for="code">QR</label>
+        <input type="text" [(ngModel)]="equipo.qr"  name="code" id="code" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Fabricante</label>
+        <div class="col-sm-12">
+            <input list="menac" name="menac" class="form-control" placeholder="Filtrar por nombres"
+                (change)="onFab($event)"
+            >
+            <datalist id="menac">
+                <option *ngFor="let f of fabricantes" value="{{f.name}}">
+                    {{f.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Referencia</label>
+        <div class="col-sm-12">
+            <input list="ref" name="ref" class="form-control" placeholder="Filtrar por nombres"
+                (change)="onRef($event)">
+            <datalist id="ref">
+                <option *ngFor="let r of referencias" value="{{r.name}}">
+                    {{r.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Disco duro</label>
+        <div class="col-sm-12">
+            <input list="disk" name="disk" class="form-control" placeholder="Filtrar por nombres"
+                (change)="onDisk($event)">
+            <datalist id="disk">
+                <option *ngFor="let d of disks" value="{{d.name}}">
+                    {{d.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">RAM</label>
+        <input type="text" [(ngModel)]="equipo.ram"  name="name" id="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Procesador</label>
+        <div class="col-sm-12">
+            <input list="proc" name="proc" class="form-control" placeholder="Filtrar por nombres"
+                (change)="onProc($event)">
+            <datalist id="proc">
+                <option *ngFor="let p of procs" value="{{p.name}}">
+                    {{p.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Persona a Cargo</label>
+        <div class="col-sm-12">
+            <input list="person" name="person" class="form-control" placeholder="Filtrar por cédula"
+                (change)="onPer($event)">
+            <datalist id="person">
+                <option *ngFor="let per of people" value="{{per.ced}}">
+                    {{per.ced}}-{{per.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">QR impresora</label>
+        <input type="text" [(ngModel)]="equipo.impqr"  name="name" id="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Referencia impresora</label>
+        <div class="col-sm-12">
+            <input list="refimp" name="refimp" class="form-control" placeholder="Filtrar por referencia"
+                (change)="onRefImp($event)">
+            <datalist id="refimp">
+                <option *ngFor="let rimp of refimps" value="{{rimp.name}}">
+                    {{rimp.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Persona a Cargo  Impresora</label>
+        <div class="col-sm-12">
+            <input list="perimp" name="perimp" class="form-control" placeholder="Filtrar por cédula"
+                (change)="onPerImp($event)">
+            <datalist id="perimp">
+                <option *ngFor="let pp of people" value="{{pp.ced}}">
+                    {{pp.ced}}-{{pp.name}}
+                </option>
+            </datalist>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="form-group col">
+            <button type="submit" class="btn btn-primary  ">Guardar</button>
+        </div>   
+        <div class="form-group col">
+            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+        </div> 
+    </div>   
+</form>

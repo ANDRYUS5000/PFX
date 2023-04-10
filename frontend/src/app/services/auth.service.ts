@@ -14,23 +14,10 @@ export class AuthService {
   private URL='http://localhost:3000/api'
 //se crean instancias de Http y router
   constructor(private http:HttpClient,
-    private router:Router,
-    
+    private router:Router,  
   ) {}
 
-  opts:any = [];
-
-  //Método para obtener los tipos de espacios físicos
-  getData() {
-    return this.opts.length ?
-      of(this.opts) :
-      this.http.get<any>(this.URL+'/auth/tipoespfis')
-        .pipe(
-          tap(data => {
-            this.opts = data
-          }),
-        )
-  }
+  
 
   //conexión para realizar el ingreso al sistema, se debe especificar la url y enviar el usuario
   login(user:any){
@@ -51,10 +38,7 @@ export class AuthService {
   registerUser(user:any){
     return this.http.post<any>(this.URL+'/auth/registeruser',user);
   }
-  //se especifica la ruta para que el Super Admin registre un espacio y se envía el espacio
-  createEspace(espacio:any){
-    return this.http.post<any>(this.URL+'/auth/crearespacio',espacio);
-  }
+
   //método para cerrar sesión, se eliminan las variables del localStorage y se redirige al inicio
   logOut(){
     localStorage.clear()
@@ -78,6 +62,43 @@ export class AuthService {
   getTiposDependencia(){
     return this.http.get(this.URL +'/auth/tipodependencias');
   }
- 
-  
+
+  registerFab(fab:any)
+  {
+    return this.http.post(this.URL +'/auth/registerfab',fab);
+  }
+  registerDisk(disk:any){
+    return this.http.post(this.URL +'/auth/registerdisk',disk);
+  }
+  registerProc(proc:any){
+    return this.http.post(this.URL +'/auth/registerproc',proc);
+  }
+  registerRefimp(refimp:any){
+    return this.http.post(this.URL +'/auth/registerefimp',refimp);
+  }
+  registerRef(ref:any){
+    return this.http.post<any>(this.URL +'/auth/registeref',ref);
+  }
+  getFabs(){
+    return this.http.get<any>(this.URL +'/auth/getfabs');
+  }
+  getDisks(){
+    return this.http.get<any>(this.URL +'/auth/getdisks');
+  }
+  getProcesadores(){
+    return this.http.get<any>(this.URL +'/auth/getprocs');
+  }
+  getRefimp(){
+    return this.http.get<any>(this.URL +'/auth/getrefsimp');
+  }
+  getRefpc(){
+    return this.http.get<any>(this.URL +'/auth/getrefpc');
+  }
+  getPeopleCargo(){
+    return this.http.get<any>(this.URL+'/auth/peoplecargo');
+  }
+
+  createEquipo(equipo:any){
+    return this.http.post<any>(this.URL+'/auth/crearequipo',equipo);
+  }
 }

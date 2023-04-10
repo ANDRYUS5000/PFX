@@ -5,6 +5,7 @@ import { AuthGuard } from '../app/auth.guard';
 import { CrearusuariosComponent } from './components/crearusuarios/crearusuarios.component';
 import { CreardependenciaComponent } from './components/creardependencia/creardependencia.component';
 import { PrincipalComponent } from './components/principal/principal.component';
+import { ConceptoComponent } from './components/concepto/concepto.component';
 import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
@@ -29,7 +30,12 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path:'',
+    path:'conceptos',
+    component:ConceptoComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'test',
     component:TestComponent
   }
 ];

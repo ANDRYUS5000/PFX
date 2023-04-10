@@ -26,10 +26,10 @@ const documentoSchema=new Schema({
         type:String
     },
     firmaSop:{
-        type:String
+        type:Schema.Types.ObjectId
     },
     firmaIIT:{
-        type:String
+        type:Schema.Types.ObjectId
     }
 },
 {

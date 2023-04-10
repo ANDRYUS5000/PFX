@@ -1,6 +1,6 @@
 <div class="content">
   <nav class="navbar  navbar-dark bg-primary" aria-haspopup="true">
-    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Inicio</a>
+    <a class="navbar-brand" routerLink="/home" routerLinkActive="active">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,23 +10,17 @@
         <ng-container *ngIf="authService.loggedIn()">
           <ng-container  *ngIf="intmService.esUser() || intmService.esAdmin()">
             <li class="nav-item">
-              <a class="nav-link" routerLink="/reservas" routerLinkActive="active">Crear dependencia</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" routerLink="/main" routerLinkActive="active">Principal</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/conceptos" routerLinkActive="active">Gestionar Conceptos</a>
+            </li>
           
-          </ng-container>
-          
-        
-        
-        
+          </ng-container>   
+
           <ng-container *ngIf="intmService.esAdmin()">
             <li class="nav-item">
               <a class="nav-link" routerLink="/registeruser" routerLinkActive="active">Crear Usuarios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/createspace" routerLinkActive="active">Crear Espacios</a>
             </li>
           </ng-container>
         </ng-container>

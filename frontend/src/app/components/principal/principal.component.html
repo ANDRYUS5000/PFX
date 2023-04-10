@@ -1,38 +1,152 @@
-<div class="container-fluid mt-10 mb-10">
+<div class="container-fluid m-3">
     <div class="row">
-        <div class="form-group col">
-            <button type="button" class="btn btn-primary mt-20" data-toggle="modal" data-target="#modalPerson"
+        <div class="btn-group">
+            <button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalPerson"
             ><b>Registrar persona a cargo</b></button>
+        <ng-container *ngIf="intmService.esAdmin()">
+            <button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalFirma"
+            ><b>Registrar firmas</b></button>
+            <button class="btn btn-primary m-1" data-toggle="modal" data-target="#modalDependencia"
+            ><b>Registrar Dependencia</b></button>
+        </ng-container>
         </div>  
     </div>
 </div>
 
+<div class="container m-5">
+    <ng-container *ngIf="intmService.esUser()"> 
+         <h3 class="bg-primary text-center"><b>Mis Conceptos Técnicos</b></h3>
+    </ng-container>
+    <ng-container *ngIf="intmService.esAdmin()"> 
+        <h3 class="bg-primary text-center"><b>Conceptos Técnicos</b></h3>
+   </ng-container>
+   
 
-<div class="modal fade" id="modalPerson" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form class="from-group" id="formGeneral" name="formGeneral" (submit)="registerPerson()">
-                <div class="modal-factores">
-                    <h3>Registro</h3>
-                </div>
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" [(ngModel)]="person.name"  name="name" id="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="pass">Cédula</label>
-                    <input type="text"  [(ngModel)]="person.ced" name="ced" id="ced" class="form-control" required>
-                </div>
-               
-                <div class="row">
-                    <div class="form-group col">
-                        <button type="submit" class="btn btn-primary  ">Guardar</button>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Dependencia</th>
+              <th scope="col">Versión</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+
+    </table>
+</div>
+
+<div class="container m-5">
+    <div class="modal p-5" id="modalPerson" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="from-group" id="formGeneral" name="formGeneral" (submit)="registerPerson()">
+                    <div class="modal-factores">
+                        <h3>Registro</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" [(ngModel)]="person.name"  name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Cédula</label>
+                        <input type="text"  [(ngModel)]="person.ced" name="ced" id="ced" class="form-control" required>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary  ">Guardar</button>
+                        </div>   
+                        <div class="form-group col">
+                            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+                        </div> 
                     </div>   
-                    <div class="form-group col">
-                        <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
-                    </div> 
-                </div>   
-            </form>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal p-5" id="modalFirma" data-backdrop="static">
+        <div class="modal-dialog me-20" role="document">
+            <div class="modal-content">
+                <form class="from-group" id="formGeneral" name="formGeneral" (submit)="Request()">
+                    <div class="modal-factores">
+                        <h3>Registro de Firmas</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" [(ngModel)]="jefe.name"  name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Cargo</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" [(ngModel)]="jefe.cargo" ng-disabled="perfil_isEdit"
+                            name="cargos" id="cargos" required (change)="onCargo($event)">
+                                <option value="" selected>--- Seleccione ---</option>
+                                <option *ngFor="let cargo of cargos"  ngDefaultControl
+                                value="{{cargo.id}}">{{cargo.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <label for="anexos" class="mt-4">Anexos</label>
+                        <input type="file" name="anexos" id="anexos" class="ml-2" (change)="chargeFirm($event)">
+                    </div>
+                   
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary  ">Guardar</button>
+                        </div>   
+                        <div class="form-group col">
+                            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+                        </div> 
+                    </div>   
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal p-5" id="modalDependencia" data-backdrop="static">
+        <div class="modal-dialog me-20" role="document">
+            <div class="modal-content">
+                <form class="from-group" id="formGeneral" name="formGeneral" (submit)="createDep()">
+                    <div class="modal-factores">
+                        <h3>Registro de Dependencias</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Código</label>
+                        <input type="text" [(ngModel)]="dependencia.id_unidad"  name="code" id="code" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" [(ngModel)]="dependencia.nombre_unidad"  name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Tipo</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" [(ngModel)]="dependencia.tipo_unidad" ng-disabled="perfil_isEdit"
+                            name="tiposdep" id="tiposdep" required (change)="onTipo($event)">
+                                <option value="" selected>--- Seleccione ---</option>
+                                <option *ngFor="let tipo of tiposdep"  ngDefaultControl
+                                value="{{tipo}}">{{tipo}}</option>
+                            </select>
+                        </div>
+                    </div>
+                       
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary  ">Guardar</button>
+                        </div>   
+                        <div class="form-group col">
+                            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+                        </div> 
+                    </div>   
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
+

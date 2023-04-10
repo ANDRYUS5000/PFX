@@ -1,0 +1,29 @@
+<form class="form-group" style="margin:0 auto" id="formGeneral" name="formGeneral" (submit)="createRefimp()">
+    <div class="modal-factores">
+        <h3>Registro de Fabricante</h3>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Marca</label>
+        <div class="col-sm-12">
+            <select class="form-control" [(ngModel)]="refimp.marca" ng-disabled="perfil_isEdit"
+            name="tipos" id="tipos" required (change)="onMarca($event)">
+                <option value="" selected>--- Seleccione ---</option>
+                <option *ngFor="let marca  of marcas"  ngDefaultControl
+                value="{{marca}}">{{marca}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">Modelo</label>
+        <input type="text" [(ngModel)]="refimp.desc"  name="name" id="name" class="form-control" required>
+    </div>
+    
+    <div class="row">
+        <div class="form-group col">
+            <button type="submit" class="btn btn-primary  ">Guardar</button>
+        </div>   
+        <div class="form-group col">
+            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+        </div> 
+    </div>   
+</form>

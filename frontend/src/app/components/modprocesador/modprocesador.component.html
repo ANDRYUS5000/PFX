@@ -1,0 +1,33 @@
+<form class="form-group" style="margin:0 auto" id="formGeneral" name="formGeneral" (submit)="createProc()">
+    <div class="modal-factores">
+        <h3>Registro de Procesador</h3>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-12">Tipo</label>
+        <div class="col-sm-12">
+            <select class="form-control" [(ngModel)]="procesador.tipo" ng-disabled="perfil_isEdit"
+            name="tipos" id="tipos" required (change)="onTipo($event)">
+                <option value="" selected>--- Seleccione ---</option>
+                <option *ngFor="let tipo  of tipos"  ngDefaultControl
+                value="{{tipo}}">{{tipo}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">Descripción</label>
+        <input type="text" [(ngModel)]="procesador.des"  name="name" id="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="ghz">Ghz</label>
+        <input type="text" [(ngModel)]="procesador.frecuencia"  name="ghz" id="ghz" class="form-control" required>
+    </div>
+    
+    <div class="row">
+        <div class="form-group col">
+            <button type="submit" class="btn btn-primary  ">Guardar</button>
+        </div>   
+        <div class="form-group col">
+            <button type="buttton" class="btn btn-cancel" data-dismiss="modal">Cerrar</button>
+        </div> 
+    </div>   
+</form>

@@ -1,0 +1,50 @@
+<div class="container-fluid m-3">
+    <form class="from-group col-8 "  style="margin:0 auto" id="formGeneral" name="formGeneral" (submit)="createConcep()">
+        <div class="modal-factores">
+            <h3>Creación de conceptos técnicos</h3>
+        </div>
+        <div class="form-group">
+            <label for="name">Nombre Concepto</label>
+            <input type="text" [(ngModel)]="concepto.name"  name="name" id="name" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-12">Nombre Dependencia</label>
+            <div class="col-sm-12">
+                <select class="form-control" [(ngModel)]="version.dependencia"ng-disabled="perfil_isEdit"
+                name="tiposdep" id="tiposdep" required (change)="onDep($event)">
+                    <option value="" selected>--- Seleccione ---</option>
+                    <option *ngFor="let dep of dependencias"  ngDefaultControl
+                    value="{{dep.id_unidad}}">{{dep.nombre_unidad}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-group" style="margin:0 auto">
+                <button class="btn btn-primary m-1"
+                (click)="cargarTabla()" ><b>Crear tabla</b></button>
+            
+                <button class="btn btn-primary m-1" (click)="cargarDocumento()"
+                ><b>Crear Documento</b></button>
+            
+            </div>  
+        </div>
+        <div class="row">
+            <div class="btn-group" style="margin:0 auto">
+                <div class="form-group col">
+                    <button type="submit" class="btn btn-primary" >Guardar</button>
+                </div>   
+                <div class="form-group col">
+                    <button type="submit" class="btn btn-cancel  ">Cancelar</button>
+                </div>  
+            </div>
+        </div> 
+    </form>
+    <div *ngIf="showtabla" >
+        <app-tabla></app-tabla>
+    </div>
+    <div *ngIf="showdocumento" >
+        <app-documento></app-documento>
+    </div>
+</div>
+
